@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
+import { ProductsService } from './api/services/products.service';
 
 
 @NgModule({
@@ -25,6 +26,9 @@ import { MatCardModule } from '@angular/material/card';
     MatButtonModule,
     ReactiveFormsModule,
     MatCardModule
+  ],
+  providers: [
+    ProductsService
   ]
 })
 export class ShopModule {

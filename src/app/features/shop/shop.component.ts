@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { Product } from './api/models/product';
+import { ProductsService } from './api/services/products.service';
 
 @Component({
   selector: 'app-shop',
@@ -11,7 +14,11 @@ export class ShopComponent implements OnInit {
     search: new FormControl(null, Validators.compose([]))
   });
 
-  constructor() { }
+  products$: Observable<Product[]>;
+
+  constructor(private productsService:ProductsService) {
+    this.products$ = this.productsService.get();
+  }
 
   ngOnInit(): void {
   }
@@ -31,6 +38,7 @@ export class ShopComponent implements OnInit {
   }
 
   submit(): void {
+    const { search } = this.formGroup.value;
 
   }
 }

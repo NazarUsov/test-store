@@ -1,0 +1,25 @@
+[
+  {
+    "id": 1,
+    "user": {
+      "id": 1,
+      "fullName": "Nazar Usov",
+      "status": "Offline"
+    },
+    "img": "https://ilounge.ua/files/uploads/new_4/sravnenie-google-pixel-6-iphone-13-7.jpg",
+    "alt": "google-pixel-6",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, alias atque blanditiis cupiditate dolor doloribus eius, hic impedit minima, obcaecati optio quasi sunt voluptates voluptatibus?"
+  },
+  {
+    "id": 2,
+    "user": {
+      "id": 2,
+      "fullName": "Nik Petrol",
+      "status": "Online"
+    },
+    "img": "https://mywowo.net/media/images/cache/dubai_img_worlds_of_adventure_01_presentazione_jpg_1200_630_cover_85.jpg",
+    "alt": "dubai_img_worlds",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, alias atque blanditiis cupiditate dolor doloribus eius, hic impedit minima, obcaecati optio quasi sunt voluptates voluptatibus?"
+  }
+]
+
