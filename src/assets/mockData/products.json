@@ -11,6 +11,17 @@
     "description": "In addition to that it provides us information from the whole observable context. We can track next, error, and complete events:"
   },
   {
+    "id": 3,
+    "user": {
+      "id": 3,
+      "fullName": "Nazar Usov 2",
+      "status": "Offline"
+    },
+    "img": "https://ilounge.ua/files/uploads/new_4/sravnenie-google-pixel-6-iphone-13-7.jpg",
+    "alt": "google-pixel-6",
+    "description": "In addition to that it provides us information from the whole observable context. We can track next, error, and complete events:"
+  },
+  {
     "id": 2,
     "user": {
       "id": 2,

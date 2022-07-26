@@ -54,6 +54,8 @@ export class ShopStore extends ComponentStore<ShopState> {
     return this.select(({
                           products,
                           searchQuery
-                        }) => searchQuery && products?.filter(({ description }) => description.includes(searchQuery)) || products);
+                        }) => searchQuery && products?.filter(({ user: { fullName }, description }) => {
+      return fullName.includes(searchQuery) || description.includes(searchQuery);
+    }) || products);
   }
 }
