@@ -1,0 +1,14 @@
+header {
+  background: lightgray;
+  padding: 1rem;
+  border-bottom: 1px solid gray;
+}
+
+nav {
+  display: flex;
+  gap: 1rem;
+  li {
+    list-style: none;
+  }
+}
+

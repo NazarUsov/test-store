@@ -1,0 +1,16 @@
+<div class="shop-wrapper">
+  <form [formGroup]="formGroup" class="shop-header" (ngSubmit)="beforeSubmit()">
+    <mat-form-field class="example-form-field" appearance="outline">
+      <mat-label>Search box</mat-label>
+      <input matInput type="text" formControlName="search">
+      <button matSuffix mat-icon-button aria-label="Clear" type="button" (click)="clear()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <button mat-raised-button class="btn-search" type="submit">Search</button>
+  </form>
+
+  <div class="shop-body">
+      <app-product-card></app-product-card>
+  </div>
+</div>
