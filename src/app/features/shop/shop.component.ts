@@ -1,26 +1,50 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged, Observable, of, Subject, takeUntil } from 'rxjs';
+import { ShopStore } from './store/shop.store';
 import { Product } from './api/models/product';
-import { ProductsService } from './api/services/products.service';
 
 @Component({
   selector: 'app-shop',
   templateUrl: './shop.component.html',
   styleUrls: ['./shop.component.scss']
 })
-export class ShopComponent implements OnInit {
+export class ShopComponent implements OnInit, OnDestroy {
+  submitted: boolean = false;
+
   formGroup: FormGroup = new FormGroup({
-    search: new FormControl(null, Validators.compose([]))
+    searchQuery: new FormControl(null, Validators.compose([]))
   });
 
-  products$: Observable<Product[]>;
+  loading$: Observable<boolean>;
 
-  constructor(private productsService:ProductsService) {
-    this.products$ = this.productsService.get();
+  products$: Observable<Product[] | null> = of(null);
+
+  private searchQuery$: Subject<string | null> = new Subject<string | null>()
+
+  private destroy$: Subject<boolean> = new Subject<boolean>();
+
+  constructor(private readonly shopStore: ShopStore) {
+    this.shopStore.getProducts();
+
+    this.loading$ = this.shopStore.selectLoading();
+    this.products$ = this.shopStore.selectProducts();
   }
 
   ngOnInit(): void {
+    this.searchQuery$
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged(),
+        takeUntil(this.destroy$)
+      )
+      .subscribe((searchQuery) => {
+        this.shopStore.setSearchQuery(searchQuery);
+      })
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
   }
 
   clear(): void {
@@ -38,7 +62,8 @@ export class ShopComponent implements OnInit {
   }
 
   submit(): void {
-    const { search } = this.formGroup.value;
-
+    this.submitted = true;
+    const { searchQuery } = this.formGroup.value;
+    this.searchQuery$.next(searchQuery);
   }
 }

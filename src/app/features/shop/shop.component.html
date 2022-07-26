@@ -2,21 +2,36 @@
   <form [formGroup]="formGroup" class="shop-header" (ngSubmit)="beforeSubmit()">
     <mat-form-field class="example-form-field" appearance="outline">
       <mat-label>Search box</mat-label>
-      <input matInput type="text" formControlName="search">
+      <input matInput type="text" maxlength="250" formControlName="searchQuery" (keyup.escape)="clear()">
       <button matSuffix mat-icon-button aria-label="Clear" type="button" (click)="clear()">
         <mat-icon>close</mat-icon>
       </button>
+
+      <ng-container *ngIf="formGroup.get('searchQuery')?.invalid && (formGroup.get('searchQuery')?.touched || submitted)">
+        <mat-error *ngIf="formGroup.get('searchQuery')?.hasError('maxlength')">
+          Maximum length: {{ formGroup.get('searchQuery')?.errors?.['maxlength']?.['requiredLength'] }}
+        </mat-error>
+      </ng-container>
     </mat-form-field>
-    <button mat-raised-button class="btn-search" type="submit">Search</button>
+    <button mat-raised-button class="btn-search" type="submit" [disabled]="formGroup.invalid">Search</button>
   </form>
 
   <div class="shop-body">
-    <ng-container *ngIf="(products$ | async) as products; else loadingTemplate">
-      <app-product-card *ngFor="let product of products" [product]="product"></app-product-card>
+    <ng-container *ngIf="!(loading$ | ngrxPush); else loadingTemplate">
+      <ng-container *ngrxLet="products$; let products">
+        <ng-container *ngIf="products?.length; else notFoundTemplate">
+          <app-product-card *ngFor="let product of products" [product]="product"></app-product-card>
+        </ng-container>
+      </ng-container>
     </ng-container>
-
-    <ng-template #loadingTemplate>
-      Loading...
-    </ng-template>
   </div>
 </div>
+
+
+<ng-template #loadingTemplate>
+  Loading...
+</ng-template>
+
+<ng-template #notFoundTemplate>
+  Not found
+</ng-template>
