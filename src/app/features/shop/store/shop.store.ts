@@ -33,8 +33,7 @@ export class ShopStore extends ComponentStore<ShopState> {
               this.setProducts(products);
               this.setLoading(false);
             },
-            error: (e) => {
-              console.log(e);
+            error: () => {
               this.setLoading(false);
             },
           }),

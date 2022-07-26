@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ShopComponent } from './shop.component';
+import { ShopStore } from './store/shop.store';
+import { ProductsService } from './api/services/products.service';
+import { HttpClientModule } from '@angular/common/http';
+import { LetModule, PushModule } from '@ngrx/component';
 
 describe('ShopComponent', () => {
   let component: ShopComponent;
@@ -8,9 +12,15 @@ describe('ShopComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ShopComponent ]
+      declarations: [ShopComponent],
+      imports: [
+        HttpClientModule,
+        PushModule,
+        LetModule
+      ],
+      providers: [ShopStore, ProductsService]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ShopComponent);
     component = fixture.componentInstance;

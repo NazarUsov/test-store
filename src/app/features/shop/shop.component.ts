@@ -10,7 +10,7 @@ import { Product } from './api/models/product';
   styleUrls: ['./shop.component.scss']
 })
 export class ShopComponent implements OnInit, OnDestroy {
-  submitted: boolean = false;
+  submitted = false;
 
   formGroup: FormGroup = new FormGroup({
     searchQuery: new FormControl(null, Validators.compose([]))

@@ -21,6 +21,11 @@
     "lib": [
       "es2020",
       "dom"
+    ],
+    "plugins": [
+      {
+        "name": "typescript-eslint-language-service"
+      }
     ]
   },
   "angularCompilerOptions": {
@@ -28,5 +33,5 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
 }
